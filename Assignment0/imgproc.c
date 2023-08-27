@@ -4,6 +4,14 @@
 #include <stdint.h>
 #include <math.h>
 
+/*
+ --------------------------------------- RUNNING INSTRUCTIONS ---------------------------------------
+  TO RUN: make run
+  TO COMPILE: make
+  TO CLEAN: make clean
+  ---------------------------------------------------------------------------------------------------
+*/
+
 /* Do not modify write_pgm() or read_pgm() */
 int write_pgm(char *file, void *image, uint32_t x, uint32_t y)
 {
@@ -91,7 +99,7 @@ int read_pgm(char *file, void *image, uint32_t x, uint32_t y)
   return 0;
 }
 
-void edge_detection(int8_t image[1024][1024], int8_t out[1024][1024]){
+void edge_detection(uint8_t image[1024][1024], uint8_t out[1024][1024]){
   int8_t sobelX[3][3] = 
       {{-1, 0, 1},
        {-2, 0, 2},
@@ -108,8 +116,8 @@ void edge_detection(int8_t image[1024][1024], int8_t out[1024][1024]){
   int x,y,i,j;
   for (x = 1; x < width - 1; x++){
     for(y = 1; y < height - 1; y++){
-      int accumX = 0;
-      int accumY = 0;
+      int8_t accumX = 0;
+      int8_t accumY = 0;
       for(i = 0; i < 3; i++){
         for(j = 0; j < 3; j++){
           
@@ -122,7 +130,10 @@ void edge_detection(int8_t image[1024][1024], int8_t out[1024][1024]){
           }
         }
       }
-      out[x][y] = accumX + accumY;
+      int magnitude = sqrt(accumX * accumX + accumY * accumY);
+      // Normalize and map to 0-255 range
+      //out[x][y] = (uint8_t) (255.0 * magnitude / (255.0 * sqrt(2.0)));
+      out[x][y] = (uint8_t) magnitude;
     }
 
   }
@@ -130,16 +141,23 @@ void edge_detection(int8_t image[1024][1024], int8_t out[1024][1024]){
 
 int main(int argc, char *argv[])
 {
-  int8_t image[1024][1024];
-  int8_t out[1024][1024];
+  uint8_t image1[1024][1024];
+  uint8_t out1[1024][1024];
+
+  uint8_t image2[1024][1024];
+  uint8_t out2[1024][1024];
   
   /* Example usage of PGM functions */
   /* This assumes that motorcycle.pgm is a pgm image of size 1024x1024 */
-  read_pgm("motorcycle.pgm", image, 1024, 1024);
+  read_pgm("bigger_digger.pgm", image1, 1024, 1024);
+  edge_detection(image1, out1);
+  write_pgm("bigger_digger.edge.pgm", out1, 1024, 1024);
 
+  read_pgm("motorcycle.pgm", image2, 1024, 1024);
+  edge_detection(image2, out2);
+  write_pgm("motorcycle.edge.pgm", out2, 1024, 1024);
   /* After processing the image and storing your output in "out", write *
    * to motorcycle.edge.pgm.                                            */
-  write_pgm("motorcycle.edge.pgm", out, 1024, 1024);
   
   return 0;
 }
