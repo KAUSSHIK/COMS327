@@ -1,0 +1,5 @@
+This program implements a SOBEL edge detection filter on PGM images.
+Steps to see output:
+    1. make
+    2. ./imgproc
+    3. make clean (if you want to remove the binary executable and the *.edge.pgm files that arise after performing edge detection)
