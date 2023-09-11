@@ -83,11 +83,12 @@ void dequeue(struct Queue* queue, int* x, int* y) {
 #define POKEMON_CENTER 'C'
 #define POKEMART 'M'
 
-#define ANSI_COLOR_RED     "\x1b[31m"
-#define ANSI_COLOR_GREEN   "\x1b[32m"
-#define ANSI_COLOR_BLUE    "\x1b[34m"
-#define ANSI_COLOR_RESET   "\x1b[0m"
-#define ANSI_COLOR_BROWN   "\x1b[33m"
+#define RED     "\x1b[31m"
+#define GREEN   "\x1b[32m"
+#define BLUE    "\x1b[34m"
+#define RESET   "\x1b[0m"
+#define BROWN   "\x1b[33m"
+#define PINK    "\x1b[38;5;205m"
 
 
 //Function to initialize the map
@@ -116,80 +117,55 @@ void initializeMap(char map[MAP_HEIGHT][MAP_WIDTH], int* exitIndices) {
     exitIndices[1] = exit2;
 
     //MAP TO MEET REQUIREMENTS:
-    int tallGrassRegions = 2;
-    int waterRegions = 1;
-    int clearingRegions = 2;
+    int tallGrassRegions = 7;
+    int waterRegions = 4;
+    int clearingRegions = 5;
 
-    int lgX1, lgY1, lgX2, lgY2;
-    int wX, wY;
-    int cX1, cY1, cX2, cY2;
-
-    lgX1 = rand() % (MAP_WIDTH - 3) + 1;  
-    lgY1 = rand() % (MAP_HEIGHT - 3) + 1;
-    lgX2 = rand() % (MAP_WIDTH - 3) + 1;  
-    lgY2 = rand() % (MAP_HEIGHT - 3) + 1;
-    wX = rand() % (MAP_WIDTH - 3) + 1;  
-    wY = rand() % (MAP_HEIGHT - 3) + 1;
-    cX1 = rand() % (MAP_WIDTH - 3) + 1;  
-    cY1 = rand() % (MAP_HEIGHT - 3) + 1;
-    cX2 = rand() % (MAP_WIDTH - 3) + 1;
-    cY2 = rand() % (MAP_HEIGHT - 3) + 1;
-
-    // Expand outward from the starting points of all these regions until the map is filled
+    
     while (tallGrassRegions > 0 || waterRegions > 0 || clearingRegions > 0) {
+        int startX, startY;
+        
         // Expand the tall grass regions
-        if (tallGrassRegions > 0) {
-            // Expand the first tall grass region
-            if (lgX1 > 0 && lgX1 < MAP_WIDTH - 1 && lgY1 > 0 && lgY1 < MAP_HEIGHT - 1) {
-                map[lgY1][lgX1] = LONG_GRASS;
-                lgX1 += rand() % 3 - 1;  //-1, 0, 1
-                lgY1 += rand() % 3 - 1;
-            } else {
-                tallGrassRegions--;
-            }
-
-            // Expand the second tall grass region
-            if (lgX2 > 0 && lgX2 < MAP_WIDTH - 1 && lgY2 > 0 && lgY2 < MAP_HEIGHT - 1) {
-                map[lgY2][lgX2] = LONG_GRASS;
-                lgX2 += rand() % 3 - 1;  //-1, 0, 1
-                lgY2 += rand() % 3 - 1;
-            } else {
-                tallGrassRegions--;
-            }
-        }
-
-        // Expand the water region
-        if (waterRegions > 0) {
-            if (wX > 0 && wX < MAP_WIDTH - 1 && wY > 0 && wY < MAP_HEIGHT - 1) {
-                map[wY][wX] = WATER;
-                wX += rand() % 3 - 1;  //-1, 0, 1
-                wY += rand() % 3 - 1;
-            } else {
-                waterRegions--;
-            }
-        }
-
-        //Expand the clearing regions
-        if (clearingRegions > 0) {
-            // Expand the first clearing region
-            if (cX1 > 0 && cX1 < MAP_WIDTH - 1 && cY1 > 0 && cY1 < MAP_HEIGHT - 1) {
-                map[cY1][cX1] = CLEARING_GRASS;
-                cX1 += rand() % 3 - 1;  //-1, 0, 1
-                cY1 += rand() % 3 - 1;
-            } else {
-                clearingRegions--;
-            }
-
-            // Expand the second clearing region
-            if (cX2 > 0 && cX2 < MAP_WIDTH - 1 && cY2 > 0 && cY2 < MAP_HEIGHT - 1) {
-                map[cY2][cX2] = CLEARING_GRASS;
-                cX2 += rand() % 3 - 1;  //-1, 0, 1
-                cY2 += rand() % 3 - 1;
-            } else {
-                clearingRegions--;
-            }
-        }
+        for (int tg = 0; tg < tallGrassRegions; tg++) {
+            startX = rand() % (MAP_WIDTH - 2) + 1;  
+            startY = rand() % (MAP_HEIGHT - 2) + 1;
             
+            while (startX > 0 && startX < MAP_WIDTH - 1 && startY > 0 && startY < MAP_HEIGHT - 1) {
+                map[startY][startX] = LONG_GRASS;
+                startX += rand() % 3 - 1;  // -1, 0, 1
+                startY += rand() % 3 - 1;
+            }
+            
+            tallGrassRegions--;
+        }
+
+        // Expand the water regions
+        for (int wr = 0; wr < waterRegions; wr++) {
+            startX = rand() % (MAP_WIDTH - 2) + 1;  
+            startY = rand() % (MAP_HEIGHT - 2) + 1;
+            
+            while (startX > 0 && startX < MAP_WIDTH - 1 && startY > 0 && startY < MAP_HEIGHT - 1) {
+                map[startY][startX] = WATER;
+                startX += rand() % 3 - 1;  // -1, 0, 1
+                startY += rand() % 3 - 1;
+            }
+            
+            waterRegions--;
+        }
+
+        // Expand the clearing regions
+        for (int cr = 0; cr < clearingRegions; cr++) {
+            startX = rand() % (MAP_WIDTH - 2) + 1;  
+            startY = rand() % (MAP_HEIGHT - 2) + 1;
+            
+            while (startX > 0 && startX < MAP_WIDTH - 1 && startY > 0 && startY < MAP_HEIGHT - 1) {
+                map[startY][startX] = CLEARING_GRASS;
+                startX += rand() % 3 - 1;  // -1, 0, 1
+                startY += rand() % 3 - 1;
+            }
+            
+            clearingRegions--;
+        }
     }
 }
 
@@ -214,8 +190,9 @@ void placePaths(char map[MAP_HEIGHT][MAP_WIDTH], int* exitIndices) {
         map[i][nsPathStart] = ROAD;   
         if(moveDirection != 0){
             nsPathStart += moveDirection;
-
-            map[i][nsPathStart] = ROAD;
+            if (map[i][nsPathStart] != POKEMON_CENTER && map[i][nsPathStart] != POKEMART && map[i][nsPathStart] != ROCK){
+                map[i][nsPathStart] = ROAD;
+            }
         }
 
     }
@@ -230,7 +207,10 @@ void placePaths(char map[MAP_HEIGHT][MAP_WIDTH], int* exitIndices) {
         map[ewPathStart][j] = ROAD;
         if (moveDirection != 0) {
             ewPathStart += moveDirection;
-            map[ewPathStart][j] = ROAD;
+            if(map[ewPathStart][j] != POKEMON_CENTER && map[ewPathStart][j] != POKEMART && map[ewPathStart][j] != ROCK){
+                map[ewPathStart][j] = ROAD;
+            }
+            
         }
     }
 }
@@ -336,16 +316,25 @@ void connectPokeStoreToRoad(char map[MAP_HEIGHT][MAP_WIDTH], int pokeStoreX, int
 void printColoredMap(char map[MAP_HEIGHT][MAP_WIDTH]) {
     for (int i = 0; i < MAP_HEIGHT; i++) {
         for (int j = 0; j < MAP_WIDTH; j++) {
-            char* textColor = ANSI_COLOR_RESET;  
+            char* textColor = RESET;  
             switch (map[i][j]) {
                 case WATER:
-                    textColor = ANSI_COLOR_BLUE;
+                    textColor = BLUE;
                     break;
                 case LONG_GRASS:
-                    textColor = ANSI_COLOR_GREEN;
+                    textColor = GREEN;
                     break;
                 case ROCK:
-                    textColor = ANSI_COLOR_BROWN;
+                    textColor = BROWN;
+                    break;
+                case CLEARING:
+                    textColor = RED;
+                    break;
+                case POKEMART:
+                    textColor = PINK;
+                    break;
+                case POKEMON_CENTER:
+                    textColor = PINK;
                     break;
 
                 default:
@@ -354,7 +343,7 @@ void printColoredMap(char map[MAP_HEIGHT][MAP_WIDTH]) {
             }
 
             // Print the character with the chosen color
-            printf("%s%c%s", textColor, map[i][j], ANSI_COLOR_RESET);
+            printf("%s%c%s", textColor, map[i][j], RESET);
         }
         printf("\n");  
     }
@@ -377,6 +366,5 @@ int main(int argc, char *argv[]) {
     connectPokeStoreToRoad(map, pokemonCenX, pokemonCenY);  
     connectPokeStoreToRoad(map, pokeMartX, pokeMartY);
 
-    int i, j;
     printColoredMap(map);
 }

@@ -1,0 +1,9 @@
+9/9/2023 10:22: Added basic map generation
+
+9/9/2023 14:25: Added roads accross the map from one N,S exit and one on E, S exit
+
+9/10/2023 00:40: Added BFS and Queue to find shortest path to the nearest road
+
+9/10/2023 15:00: Added two regions and one water region
+
+9/10/2023: 21:50: Fixed all errors regarding the display
