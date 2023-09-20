@@ -1,0 +1,9 @@
+9/16/2023 10:00: Remade basic map generation
+
+9/17/2023 14:15: Added roads accross the map from given N,S,E, W exits and randomly delcared them if not exists yet
+
+9/17/2023 23:00: modified shortest path finder to make it more modular
+
+9/18/2023 03:00: Worked on making the navigation commands
+
+9/18/2023: 06:00: tried very hard to debug malloc errors

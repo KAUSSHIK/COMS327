@@ -107,14 +107,14 @@ void initializeMap(char map[MAP_HEIGHT][MAP_WIDTH], int* exitIndices) {
 
     //The exit is placed randomly along the top and bottom edges of the map
     srand(time(NULL));
+    int exit1 = rand() % MAP_WIDTH;
+    map[0][exit1] = ROAD;
     //The exit is placed randomly along the left and right edges of the map
-
-    //map[0][3] = ROAD;
-    //map[5][0] = ROAD;
-    //map[MAP_HEIGHT-1][65] = ROAD;
-    //map[17][MAP_WIDTH-1] = ROAD;
-
+    int exit2 = rand() % MAP_HEIGHT;
+    map[exit2][0] = ROAD;
     //Store the indices of the exits in the exitIndices array
+    exitIndices[0] = exit1;
+    exitIndices[1] = exit2;
 
     //MAP TO MEET REQUIREMENTS:
     int tallGrassRegions = 7;
@@ -169,35 +169,19 @@ void initializeMap(char map[MAP_HEIGHT][MAP_WIDTH], int* exitIndices) {
     }
 }
 
-void placeExits(char map[MAP_HEIGHT][MAP_WIDTH], int nsPathStart, int nsPathEnd, int ewPathStart, int ewPathEnd){
-    srand(time(NULL));
-    if(nsPathStart == -1){
-        nsPathStart = rand() % MAP_WIDTH;
-    }
-    if(nsPathEnd == -1){
-        nsPathEnd = rand() % MAP_WIDTH;
-    }
-    if(ewPathStart == -1){
-        ewPathStart = rand() % MAP_HEIGHT;
-    }
-    if(ewPathEnd == -1){
-        ewPathEnd = rand() % MAP_HEIGHT;
-    }
-    map[0][nsPathStart] = ROAD;
-    map[ewPathStart][0] = ROAD;
-    map[MAP_HEIGHT-1][nsPathEnd] = ROAD;
-    map[ewPathEnd][MAP_WIDTH-1] = ROAD;
-
-}
 
 // Function to place paths
-void placePaths(char map[MAP_HEIGHT][MAP_WIDTH], int nsPathStart, int nsPathEnd, int ewPathStart, int ewPathEnd) {
+void placePaths(char map[MAP_HEIGHT][MAP_WIDTH], int* exitIndices) {
 
     srand(time(NULL));
-    placeExits(map, nsPathStart, nsPathEnd, ewPathStart, ewPathEnd);
+
+    
+    int nsPathStart = exitIndices[0];   
+    int ewPathStart = exitIndices[1];   
+
     int i, j;
     // Generate N-S path
-    for (i = 1; i < MAP_HEIGHT - 2; i++) {
+    for (i = 1; i < MAP_HEIGHT; i++) {
         // Ensure the path stays within bounds, avoiding the east and west borders
         nsPathStart = (nsPathStart < 2) ? 2 : nsPathStart;  
         nsPathStart = (nsPathStart >= MAP_WIDTH - 2) ? MAP_WIDTH - 3 : nsPathStart;  
@@ -212,24 +196,9 @@ void placePaths(char map[MAP_HEIGHT][MAP_WIDTH], int nsPathStart, int nsPathEnd,
         }
 
     }
-    int startCol; int endCol;
-    if(nsPathStart < nsPathEnd){
-        startCol = nsPathStart;
-        endCol = nsPathEnd;
-    }else{
-        startCol = nsPathEnd;
-        endCol = nsPathStart;
-    }
-
-    for(int col = startCol; col <= endCol; col++){
-        map[i][col] = ROAD;
-    }
-    int nextCol = (endCol == nsPathStart) ? nsPathEnd + 1 : nsPathStart + 1;
-    map[i][nextCol] = ROAD;
-
 
     // Generate E-W path
-    for (j = 1; j < MAP_WIDTH-2; j++) {
+    for (j = 1; j < MAP_WIDTH; j++) {
         
         ewPathStart = (ewPathStart < 2) ? 2 : ewPathStart;  // Avoid the top border
         ewPathStart = (ewPathStart >= MAP_HEIGHT - 2) ? MAP_HEIGHT - 3 : ewPathStart;  // Avoid the bottom border
@@ -244,27 +213,7 @@ void placePaths(char map[MAP_HEIGHT][MAP_WIDTH], int nsPathStart, int nsPathEnd,
             
         }
     }
-    int startRow, endRow;
-
-    if (ewPathStart < ewPathEnd) {
-        startRow = ewPathStart;
-        endRow = ewPathEnd;
-    }else {
-        startRow = ewPathEnd;
-        endRow = ewPathStart;
-    }
-
-    for (int row = startRow; row <= endRow; row++) {
-        map[row][j] = '#';
-    }
-    map[endRow][j] = '#';
 }
-
-
-
-
-
-
 
 void placePokeStores(char map[MAP_HEIGHT][MAP_WIDTH], int* exitIndices, int* pokeCenX, int* pokeCenY, int* pokeMartX, int* pokeMartY){
     srand(time(NULL));
@@ -410,7 +359,7 @@ int main(int argc, char *argv[]) {
 
     initializeMap(map, exitIndices);  
 
-    placePaths(map, -1, -1, -1, -1);     
+    placePaths(map, exitIndices);     
 
     placePokeStores(map, exitIndices, &pokemonCenX, &pokemonCenY, &pokeMartX, &pokeMartY);
 
