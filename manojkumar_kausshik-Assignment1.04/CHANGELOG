@@ -1,0 +1,10 @@
+10/7/2023:
+    21:00 - Defined all the needed constants and macros
+    23:00 - Added all necessary modifications to the structs defined before
+10/8/2023:
+    01:00 - modified the WORLD, MAP to hold heaps and made a comparator
+    11:00 - Satrted working on the placement
+    15:00 - Started working on the movement functions
+    17:00 - Added functions that print the DMAPS
+    21:00 - Debugged and Added Switches
+    22:00 - Code clean up, README GENERATION, CHANGELOG GENERATION

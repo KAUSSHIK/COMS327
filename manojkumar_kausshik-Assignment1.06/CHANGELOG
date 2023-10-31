@@ -1,0 +1,9 @@
+10/28/2023:
+    21:00 - Defined all the needed constants and macros
+    23:00 - Added all necessary modifications to the structs defined before, ADDING SOME FOR MOEVEMNT
+10/29/2023:
+    01:00 - Satrted working on the movement of pc from map to map
+    11:00 - Added display windows and added movement or map to map
+    15:00 - Started working on the fly X, Y movement
+    17:00 - Debugged
+    20:00 - Code clean up, README GENERATION, CHANGELOG GENERATION

@@ -1,0 +1,19 @@
+COMS 327 - ASSIGNMENT 1.04
+
+Author: @kausshik (Kausshik Manojkumar)
+
+                                                                    INSTRUCTIONS TO RUN
+                                                            1. make
+                                                            2. make run (or ./pc_and_trainers --numtrainers x  ,  if you want to specify the switch)
+                                                            3. make clean
+                                                            
+
+In this fourth iteration of the Pokémon game that we are building, we implemnted the MOVEMENTS for the trainers
+
+So in the professors version of the code, I was able to create a new function that places the player character (PC) and all the other NPCs on the map
+
+IN THE OUTPUT player characters position is represented by '@' and the others are same as defined, you can enter --numtrainers to see how it works.
+
+FOR NOW THE CODE WILL KEEP PRINTING THE MOTION of all charcters, but now I did not know how to also include the code to move around maps but sicne that was not part of the requiremnt i hope i get the benefit of the doubt
+
+ADDED COLOR to make it look appealing and easy to see 

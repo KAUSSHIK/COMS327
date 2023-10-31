@@ -1,0 +1,17 @@
+COMS 327 - ASSIGNMENT 1.06
+
+Author: @kausshik (Kausshik Manojkumar)
+
+                                                                    INSTRUCTIONS TO RUN
+                                                            1. make
+                                                            2. ./poke327
+                                                            3. make clean
+                                                            
+
+In this sixth iteration of the Pokémon game that we are building, we implemnted the MOVEMENTS from map to map
+
+So in the professors version of the code, I was able to reintroduce a new function that places the player character (PC) and all the other NPCs on the map and then move it using the ncurses library and move it from map to map
+
+IN THE OUTPUT player characters position is represented by '@' and the others are same as defined, you can see that the hikers and rivals move towards the pc updating their distance maps as the pc moves and move acordingly from map to map, you can fly as well
+
+Thank you.

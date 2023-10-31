@@ -1,0 +1,9 @@
+10/19/2023:
+    21:00 - Defined all the needed constants and macros
+    23:00 - Added all necessary modifications to the structs defined before
+10/22/2023:
+    01:00 - added display windows and implemneted the use of ncurses
+    11:00 - Satrted working on the movement of pc
+    15:00 - Started working on the movement functions of oher characters after contact with PC
+    17:00 - Debugged and added other functionality
+    22:00 - Code clean up, README GENERATION, CHANGELOG GENERATION
