@@ -1,0 +1,19 @@
+COMS 327 - ASSIGNMENT 1.07
+
+Author: @kausshik (Kausshik Manojkumar)
+
+                                                                    INSTRUCTIONS TO RUN
+                                                            1. make
+                                                            2. ./poke327 <name of csv file you want to print without .csv extension>
+                                                            3. make clean
+                                                            
+
+In this sevfenth iteration of the Pokémon game that we are building, we implemnted the CSV PARSING from map to map
+
+So in the professors version of the code, I was able to reintroduce a new .cpp program that reads the given file when passed in as a CL Argument
+
+IN THE OUTPUT we can see the contents of the csv file taht we passed in as a command line argument
+
+i am using the locally stored DB in HOME/.poke327
+
+Thank you.

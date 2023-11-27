@@ -1,0 +1,21 @@
+COMS 327 - ASSIGNMENT 1.08
+
+Author: @kausshik (Kausshik Manojkumar)
+
+                                                                    INSTRUCTIONS TO RUN
+                                                            1. make
+                                                            2. ./poke327 <name of csv file you want to print without .csv extension>
+                                                            3. make clean
+                                                            
+
+In this eigth iteration of the Pokémon game that we are building, we implemnted the pokemon genration
+
+So in the professors version of the code, I was able to reintroduce a new file pokemon.cpp that was responsible for making the pokemon and modified the io.cpp to choose pokemon when starting
+
+Made necessary fuctions to place pokemon so they can be discoverd whern walking through the maps
+
+IN THE OUTPUT we can see the messages that show the discovery of pokemon
+
+i am using the locally stored DB in HOME/.poke327
+
+Thank you.

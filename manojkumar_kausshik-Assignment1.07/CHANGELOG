@@ -1,0 +1,9 @@
+10/28/2023:
+    21:00 - Defined all the needed constants and macros for db parsing
+    23:00 - Added all necessary modifications to the structs defined before, ADDING SOME MORE FOR DB PARSING
+10/29/2023:
+    01:00 - Satrted working on the p[arsinbg for one of the csv files]
+    11:00 - analysed to the output to debug and fidn out where I was wrong
+    15:00 - wrote conditioons for all csv file names
+    17:00 - Debugged
+    20:00 - Code clean up, README GENERATION, CHANGELOG GENERATION

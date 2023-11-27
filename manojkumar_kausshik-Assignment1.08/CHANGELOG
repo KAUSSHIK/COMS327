@@ -1,0 +1,9 @@
+11/11/2023:
+    21:00 - Defined all the needed constants and macros for making pokemon
+    23:00 - Added all necessary modifications to the structs defined before, ADDING SOME MORE FOR POKEMON DATA PARSING
+11/12/2023:
+    01:00 - Satrted working on the generation of pokemon in tall grasss
+    11:00 - analysed to the output to debug and find out where I was wrong
+    15:00 - wrote functions to handle rivals, hiker, sentry pokemon
+    17:00 - Debugged, made sure code worked
+    20:00 - Code clean up, README GENERATION, CHANGELOG GENERATION
